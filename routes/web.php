@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/post',[PostController::class,'all_post']);
+Route::get('/post', [PostController::class, 'all_post']);
+
+Route::get('/{anypath}', [HomeController::class, 'index'])->where('path', '.*');
