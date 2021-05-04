@@ -1971,6 +1971,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1986,7 +1989,11 @@ __webpack_require__.r(__webpack_exports__);
       var data = new FormData();
       data.append('cat_name', this.form.cat_name);
       axios.post('add', data).then(function (res) {
+        _this.$router.push('/category-list');
+
         _this.form.reset();
+      })["catch"](function (error) {
+        _this.form.errors.record(error.response.data.errors);
       });
     }
   }
@@ -38338,6 +38345,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
+                  class: { "is-invalid": _vm.form.errors.has("cat_name") },
                   attrs: {
                     type: "text",
                     id: "categoryId",
@@ -38346,6 +38354,9 @@ var render = function() {
                   },
                   domProps: { value: _vm.form.cat_name },
                   on: {
+                    keydown: function($event) {
+                      return _vm.form.errors.clear("cat_name")
+                    },
                     input: function($event) {
                       if ($event.target.composing) {
                         return
@@ -38354,7 +38365,17 @@ var render = function() {
                     }
                   }
                 })
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.form.errors.has("cat_name")
+                ? _c("span", {
+                    staticClass: "text-danger pt-3 pb-3",
+                    staticStyle: { "font-size": "20px" },
+                    domProps: {
+                      textContent: _vm._s(_vm.form.errors.get("cat_name"))
+                    }
+                  })
+                : _vm._e()
             ]),
             _vm._v(" "),
             _vm._m(1)
