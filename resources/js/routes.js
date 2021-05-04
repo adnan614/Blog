@@ -1,7 +1,8 @@
 import Home from './components/admin/Home.vue';
 
 import Example from './components/ExampleComponent.vue';
-import Category from './components/admin/category.vue';
+import CategoryList from './components/admin/category/List.vue';
+import AddCategory from './components/admin/category/New.vue';
 
 export const routes = [
     {
@@ -14,8 +15,12 @@ export const routes = [
         component: Example
     },
     {
-        path: '/category',
-        component: Category
+        path: '/category-list',
+        component: CategoryList
+    },
+    {
+        path: '/add',
+        component: AddCategory
     }
 
     
