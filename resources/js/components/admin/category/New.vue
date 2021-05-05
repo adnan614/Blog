@@ -58,8 +58,16 @@ export default {
                   let data = new FormData();
                   data.append('cat_name', this.form.cat_name)
                   axios.post('add',data).then((res)=>{
+                    this.$swal({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Category Added Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     this.$router.push('/category-list')
-                    this.form.reset()    
+                    this.form.reset() 
+                      
                 }).catch((error) => {
                     this.form.errors.record(error.response.data.errors)
                 })
