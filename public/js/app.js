@@ -1915,7 +1915,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "list",
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.$store.dispatch("allCategory");
+  },
   computed: {
     getAllCategory: function getAllCategory() {
       return this.$store.getters.getCategory;
@@ -2387,17 +2389,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: {
-    category: "this is category"
+    category: []
   },
   getters: {
     getCategory: function getCategory(state) {
       return state.category;
     }
   },
-  actions: {},
-  mutations: {}
+  actions: {
+    allCategory: function allCategory(context) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('category').then(function (response) {
+        context.commit('categories', response.data.categories);
+      });
+    }
+  },
+  mutations: {
+    categories: function categories(state, data) {
+      return state.category = data;
+    }
+  }
 });
 
 /***/ }),
@@ -41944,17 +41959,21 @@ var render = function() {
               [
                 _vm._m(0),
                 _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c("td", [_vm._v("1")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(_vm._s(_vm.getAllCategory) + "\n              ")
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(1)
-                  ])
-                ])
+                _c(
+                  "tbody",
+                  _vm._l(_vm.getAllCategory, function(category, index) {
+                    return _c("tr", [
+                      _c("td", [_vm._v(_vm._s(index + 1))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(category.cat_name) + "\n              ")
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1, true)
+                    ])
+                  }),
+                  0
+                )
               ]
             )
           ])

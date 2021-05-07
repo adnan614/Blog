@@ -20,4 +20,12 @@ class CategoryController extends Controller
         );
         Category::create($request->all());
     }
+
+    public function all_category()
+    {
+        $categories = Category::all();
+        return response()->json([
+            'categories'=> $categories 
+        ], 200);
+    }
 }

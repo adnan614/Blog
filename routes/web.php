@@ -26,6 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/post', [PostController::class, 'all_post']);
 
-Route::get('/{anypath}', [HomeController::class, 'index'])->where('path', '.*');
+// Route::get('/{anypath}', [HomeController::class, 'index'])->where('path', '.*');
 
 Route::post('add', [CategoryController::class, 'store']);
+Route::get('/category', [CategoryController::class, 'all_category']);

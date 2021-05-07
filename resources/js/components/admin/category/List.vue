@@ -23,9 +23,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>{{getAllCategory}}
+                <tr v-for="(category,index) in getAllCategory">
+                  <td>{{index + 1}}</td>
+                  <td>{{category.cat_name}}
                   </td>
                   <td>
                       <a href="" class="btn btn-success">Edit</a>
@@ -54,7 +54,7 @@
 export default {
     name: "list",
     mounted(){
-
+       this.$store.dispatch("allCategory")
     },
     computed:{
         getAllCategory(){
