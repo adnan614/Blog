@@ -25,7 +25,7 @@
                 <tbody>
                 <tr>
                   <td>1</td>
-                  <td>category name
+                  <td>{{getAllCategory}}
                   </td>
                   <td>
                       <a href="" class="btn btn-success">Edit</a>
@@ -52,6 +52,17 @@
 
 <script>
 export default {
-    name: "list"
+    name: "list",
+    mounted(){
+
+    },
+    computed:{
+        getAllCategory(){
+            return this.$store.getters.getCategory
+        }
+    },
+    methods:{
+
+    }
 }
 </script>
