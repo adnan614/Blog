@@ -19,14 +19,16 @@
                 <tr>
                   <th>SL</th>
                   <th>Category Name</th>
+                  <th>Date</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(category,index) in getAllCategory">
+                <tr v-for="(category,index) in getAllCategory" :key="category.id">
                   <td>{{index + 1}}</td>
                   <td>{{category.cat_name}}
                   </td>
+                  <td>{{category.created_at | timeformat}}</td>
                   <td>
                       <a href="" class="btn btn-success">Edit</a>
                       <a href="" class="btn btn-danger">Delete</a>
