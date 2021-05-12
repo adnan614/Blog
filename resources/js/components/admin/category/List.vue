@@ -31,7 +31,7 @@
                   <td>{{category.created_at | timeformat}}</td>
                   <td>
                       <a href="" class="btn btn-success">Edit</a>
-                      <a href="" class="btn btn-danger">Delete</a>
+                      <a href="" @click.prevent="deleteCategory(category.id)" class="btn btn-danger">Delete</a>
                   </td>
                  
                 </tr>
@@ -64,7 +64,19 @@ export default {
         }
     },
     methods:{
-
+      deleteCategory(id){
+        axios.get('category/delete/'+id)
+        .then(()=>{
+          this.$store.dispatch("allCategory")
+          this.$swal({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Category deleted Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+        })
+      }
     }
 }
 </script>

@@ -24,12 +24,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // momemt js
-
-import moment from 'moment'
-import Vue from 'vue';
-Vue.filter('timeformat', (arg)=>{
-   return moment(arg).format("MMM Do YYYY");
-})
+import {filter} from './filter'
 
 Vue.component('admin-main', require('./components/admin/AdminMaster.vue').default);
 
