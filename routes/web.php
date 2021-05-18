@@ -31,3 +31,5 @@ Route::get('/post', [PostController::class, 'all_post']);
 Route::post('add', [CategoryController::class, 'store']);
 Route::get('/category', [CategoryController::class, 'all_category']);
 Route::get('/category/delete/{id}', [CategoryController::class, 'delete_category']);
+Route::get('/category/edit/{id}', [CategoryController::class, 'edit_category']);
+Route::post('/category/update/{id}', [CategoryController::class, 'update_category']);
