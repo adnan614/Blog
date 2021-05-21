@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
 
-class PostController extends Controller
+use Illuminate\Http\Request;
+
+class postController extends Controller
 {
     public function all_post()
     {
-        $post = Post::with('user','category')->get();
-        return $post;
+        $post = Post::with('user', 'category')->get();
+        return response()->json([
+            'posts' => $post
+        ]);
     }
 }

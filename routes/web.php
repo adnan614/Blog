@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\postController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +24,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/post', [PostController::class, 'all_post']);
 
 // Route::get('/{anypath}', [HomeController::class, 'index'])->where('path', '.*');
 
@@ -33,3 +32,6 @@ Route::get('/category', [CategoryController::class, 'all_category']);
 Route::get('/category/delete/{id}', [CategoryController::class, 'delete_category']);
 Route::get('/category/edit/{id}', [CategoryController::class, 'edit_category']);
 Route::post('/category/update/{id}', [CategoryController::class, 'update_category']);
+
+//post
+Route::get('/post', [postController::class, 'all_post']);
