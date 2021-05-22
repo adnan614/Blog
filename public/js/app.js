@@ -2246,6 +2246,7 @@ __webpack_require__.r(__webpack_exports__);
 
       reader.onload = function (event) {
         _this.form.image = event.target.result;
+        console.log(event.target.result);
       };
 
       reader.readAsDataURL(file);
