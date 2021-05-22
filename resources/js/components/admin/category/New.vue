@@ -17,6 +17,10 @@
                     <input type="text" class="form-control"  id="categoryId" placeholder="Enter Category Name" v-model="form.cat_name" :class="{'is-invalid' : form.errors.has('cat_name')}" name="cat_name" @keydown="form.errors.clear('cat_name')">
                   </div>
                   <span class="text-danger pt-3 pb-3" style="font-size:20px;" v-if="form.errors.has('cat_name')" v-text="form.errors.get('cat_name')"></span>
+                   <div class="form-group">
+                    <label for="descriptionId">description</label>
+                    <input type="text" class="form-control"  id="descriptionId" placeholder="Enter Category Name" v-model="form.description" :class="{'is-invalid' : form.errors.has('description')}" name="description" @keydown="form.errors.clear('description')">
+                  </div>
                  
                 </div>
                 <!-- /.card-body -->
@@ -50,6 +54,7 @@ export default {
       return{
            form: new Form({
                     cat_name: '',
+                    description: ''
                 })
       }
   },
@@ -57,6 +62,7 @@ export default {
       addcategory(){
                   let data = new FormData();
                   data.append('cat_name', this.form.cat_name)
+                  data.append('description', this.form.description)
                   axios.post('add',data).then((res)=>{
                     this.$swal({
                         position: 'top-end',

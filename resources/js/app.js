@@ -27,8 +27,14 @@ Vue.use(Vuex)
 import { filter } from './filter'
 
 
+// markdown editor
+import 'v-markdown-editor/dist/v-markdown-editor.css';
 
+import Editor from 'v-markdown-editor'
 
+Vue.use(Editor);
+
+// font awesome
 
 
 

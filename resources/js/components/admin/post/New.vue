@@ -9,7 +9,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" enctype="multipart/form-data">
+              <form role="form" enctype="multipart/form-data" @submit.prevent="addnewPost">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="postId">Post Name</label>
@@ -18,7 +18,7 @@
                   </div>
                   <div class="form-group">
                     <label>Select Category</label>
-                    <select class="form-control" :class="{'is_invalid': form.errors.has('cat_id')}" v-model="form.cat_id">
+                    <select class="form-control" :class="{'is_invalid': form.errors.has('cat_id')}" v-model="form.cat_id" name="cat_id">
                       <option disabled value="">select one</option>
                       <option :value="category.id" v-for="category in getAllCategory" :key="category.cat_name">{{category.cat_name}}</option>
                     
@@ -35,8 +35,8 @@
                   
                   <div class="form-group">
                     <label for="descriptionId">Description</label>
-                    <textarea type="text" class="form-control"  id="descriptionId" placeholder="Enter description " v-model="form.description"   name="description" :class="{'is_invalid': form.errors.has('description')}" >
-                    <HasError :form="form" field="decription" > </textarea>
+                   
+                    <input type="text" class="form-control"  id="descriptionId" placeholder="Enter description" v-model="form.description"   name="description" :class="{'is_invalid': form.errors.has('description')}" >
                   </div>
                  
                  
@@ -97,7 +97,31 @@ export default {
                 };
 
                 reader.readAsDataURL(file);
+             },
+             addnewPost(){
+                  let data = new FormData();
+                  data.append('title', this.form.title)
+                  data.append('cat_id', this.form.cat_id)
+                  data.append('description', this.form.description)
+                
+                 
+                  axios.post('save',data)
+               .then((res)=>{
+                 this.$router.push('/post-list')
+                  this.$swal({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Category Added Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                     
+               })
+               .catch(()=>{
+
+               })
              }
+
      }
 }
 </script>

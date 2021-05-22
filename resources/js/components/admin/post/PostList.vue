@@ -29,6 +29,7 @@
                 <tr  v-for="(post,index) in allPost" :key="post.id">
                   <td>{{index +1}}</td>
                   <td v-if="post.user" > {{post.user.name}}</td>
+                  <td v-else="" > </td>
                   <td v-if="post.category">{{post.category.cat_name}}</td>
                   <td>{{post.title}}</td>
                   <td>{{post.description | sortLength(30,"...")}}</td>
