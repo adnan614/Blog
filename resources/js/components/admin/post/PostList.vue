@@ -33,7 +33,7 @@
                   <td v-if="post.category">{{post.category.cat_name}}</td>
                   <td>{{post.title}}</td>
                   <td>{{post.description | sortLength(30,"...")}}</td>
-                  <td><img :src="post.image" width="40" height="50"></td>
+                  <td><img :src="post.image" style="height: 40px; width= 40px;"></td>
                   <td>
                       <router-link  to="" class="btn btn-success">Edit</router-link>
                       <a href="" class="btn btn-danger">Delete</a>

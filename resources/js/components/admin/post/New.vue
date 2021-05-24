@@ -26,12 +26,11 @@
                     <HasError :form="form" field="cat_id" />
                   </div>
 
-                   <div class="form-group">
-                    <label>Image</label>
-                    <input type="file" name="image" @change="changePhoto($event)" :class="{'is_invalid': form.errors.has('image')}">
-                    <HasError :form="form" field="image" />
-                    <img :src="form.image" style="height: 80px; width= 80px;"  >
-                  </div>
+                   <div class="form-group" >
+                                    <input @change = "changePhoto($event)" name="image" type="file" :class="{ 'is-invalid': form.errors.has('image') }">
+                                    <img :src="form.image"  style="width: 75px; height: 75px;">
+                                    
+                                </div>
                   
                   <div class="form-group">
                     <label for="descriptionId">Description</label>
@@ -72,13 +71,13 @@ import HasError from 'vform/src/components/bootstrap5'
 export default {
      data(){
        return{
-           form: new Form({
-               title:'',
-               description:'',
-               cat_id:'',
-               image:''
-           })
-       }
+                form: new Form({
+                    title:'',
+                    description:'',
+                    cat_id:'',
+                    image:'',
+                })
+            }
      },
      mounted(){
          this.$store.dispatch("allCategory")
@@ -89,24 +88,31 @@ export default {
         }
      },
      methods:{
-             changePhoto(event){
-               var file = event.target.files[0];
-                var reader = new FileReader();
-                reader.onload = event => {
-                  this.form.image = event.target.result
-                  console.log(event.target.result);
-                };
+              changePhoto(event){
+                let file = event.target.files[0];
 
-                reader.readAsDataURL(file);
+                 if(file.size>1048576){
+                     this.$swal({
+                         type: 'error',
+                         title: 'Oops...',
+                         text: 'Something went wrong!',
+                         footer: '<a href>Why do I have this issue?</a>'
+                     })
+                 }else{
+                     let reader = new FileReader();
+                     reader.onload = event => {
+                         this.form.photo = event.target.result
+                        
+                        
+                     };
+                     reader.readAsDataURL(file);
+                 }
+               
              },
              addnewPost(){
-                  let data = new FormData();
-                  data.append('title', this.form.title)
-                  data.append('cat_id', this.form.cat_id)
-                  data.append('description', this.form.description)
-                
                  
-                  axios.post('save',data)
+                 
+                 this.form.post('save')
                .then((res)=>{
                  this.$router.push('/post-list')
                   this.$swal({

@@ -2215,7 +2215,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2242,23 +2241,28 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var file = event.target.files[0];
-      var reader = new FileReader();
 
-      reader.onload = function (event) {
-        _this.form.image = event.target.result;
-        console.log(event.target.result);
-      };
+      if (file.size > 1048576) {
+        this.$swal({
+          type: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href>Why do I have this issue?</a>'
+        });
+      } else {
+        var reader = new FileReader();
 
-      reader.readAsDataURL(file);
+        reader.onload = function (event) {
+          _this.form.photo = event.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
     },
     addnewPost: function addnewPost() {
       var _this2 = this;
 
-      var data = new FormData();
-      data.append('title', this.form.title);
-      data.append('cat_id', this.form.cat_id);
-      data.append('description', this.form.description);
-      axios.post('save', data).then(function (res) {
+      this.form.post('save').then(function (res) {
         _this2.$router.push('/post-list');
 
         _this2.$swal({
@@ -86804,31 +86808,22 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", [_vm._v("Image")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    class: { is_invalid: _vm.form.errors.has("image") },
-                    attrs: { type: "file", name: "image" },
-                    on: {
-                      change: function($event) {
-                        return _vm.changePhoto($event)
-                      }
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  class: { "is-invalid": _vm.form.errors.has("image") },
+                  attrs: { name: "image", type: "file" },
+                  on: {
+                    change: function($event) {
+                      return _vm.changePhoto($event)
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("HasError", { attrs: { form: _vm.form, field: "image" } }),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticStyle: { height: "80px" },
-                    attrs: { src: _vm.form.image }
-                  })
-                ],
-                1
-              ),
+                  }
+                }),
+                _vm._v(" "),
+                _c("img", {
+                  staticStyle: { width: "75px", height: "75px" },
+                  attrs: { src: _vm.form.image }
+                })
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "descriptionId" } }, [
@@ -86978,7 +86973,8 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [
                         _c("img", {
-                          attrs: { src: post.image, width: "40", height: "50" }
+                          staticStyle: { height: "40px" },
+                          attrs: { src: post.image }
                         })
                       ]),
                       _vm._v(" "),
